@@ -1,0 +1,31 @@
+<p>
+  invoices works!
+</p>
+
+<div class="container">
+<ul class="panel panel-default">
+  <li class="panel-body" *ngFor="let invoice of invoices">{{invoice.customer_id}} {{invoice.discount}} {{invoice.total}}</li>
+</ul>
+ <button class="btn btn-success" (click)="createInvoice()">Create</button>
+ <div *ngIf="beginCreate">
+ <form (ngSubmit)="addInvoice(f)" #f="ngForm">
+   <div class="form-groupe">
+   
+   <input type="text" class="form-control" name="total" [(ngModel)]="total"   ngModel  required>
+   
+   
+      <input type="text" class="form-control" name="discount" [(ngModel)] = "discount" ngModel required>
+      <div class="form-group">
+          <label for="exampleFormControlSelect1">Example select</label>
+          <select class="form-control" id="exampleFormControlSelect1" name="sel" ngModel>
+            <option *ngFor="let invoice of invoices">{{invoice.customer_id}}</option>
+                        
+          </select>
+        </div>
+        With discount: {{ isNumber(total - (total/100)*discount) ? (total - discount) : '' }}
+      <button class="btn btn-primary" (click)="addInvoice(f)">Submit</button>
+   </div>
+    </form> 
+       
+</div>
+</div>
