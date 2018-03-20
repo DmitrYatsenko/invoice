@@ -8,6 +8,7 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { routing } from './app.routes';
 import { ProductsComponent } from './products/products.component';
 import { CustomersComponent } from './customers/customers.component';
+import { NewItemComponent } from './new-item/new-item.component';
 
 
 @NgModule({
@@ -15,10 +16,11 @@ import { CustomersComponent } from './customers/customers.component';
     AppComponent,
     InvoicesComponent,
     ProductsComponent,
-    CustomersComponent
+    CustomersComponent,
+    NewItemComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'my-app' }), //1. для серерной части
     HttpClientModule,
     FormsModule, 
     routing 

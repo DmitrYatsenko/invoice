@@ -9,9 +9,11 @@ import { AppService } from '../app.service';
 })
 export class InvoicesComponent implements OnInit {
   beginCreate: boolean = false; 
-  invoices: any[];
-  customers: any[];
-  
+  invoices: any;
+  customers: any;
+  customer_id: number;
+  discount: number;
+  total: number;
   constructor(public appService: AppService){
    
   }
@@ -26,8 +28,12 @@ export class InvoicesComponent implements OnInit {
   createInvoice(){
      this.beginCreate = !this.beginCreate;
   }
-  addInvoice(invoice){
-    this.appService.createInvoice(invoice);
+  addInvoice(e){
+   // e.preventDefault();
+    const newInvoice = {
+      customer_id: this.customer_id, discount: this.discount ,total: this.total
+    };
+    this.appService.createInvoice(newInvoice).subscribe(invoices => this.invoices = invoices );
   }
   onSubmit(s: NgForm){
      console.log(s);

@@ -8,7 +8,7 @@ import { AppService } from '../app.service';
 })
 
 export class CustomersComponent implements OnInit {
-custs: any[];
+custs: any;
   constructor(private appService: AppService) { }
 
   getCusts(){

@@ -7,7 +7,7 @@ import { AppService } from '../app.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-products: any[];
+products: any;
   constructor(private appService: AppService) { }
 
   ngOnInit() {

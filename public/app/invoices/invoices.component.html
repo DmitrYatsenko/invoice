@@ -1,14 +1,14 @@
 <p>
   invoices works!
 </p>
-
+<button class="btn btn-primary" [routerLink]="['/newitem']">To form new invoice</button>
 <div class="container">
 <ul class="panel panel-default">
   <li class="panel-body" *ngFor="let invoice of invoices">{{invoice.customer_id}} {{invoice.discount}} {{invoice.total}}</li>
 </ul>
  <button class="btn btn-success" (click)="createInvoice()">Create</button>
  <div *ngIf="beginCreate">
- <form (ngSubmit)="addInvoice(f)" #f="ngForm">
+ <form (ngSubmit)="addInvoice($event)">
    <div class="form-groupe">
    
    <input type="text" class="form-control" name="total" [(ngModel)]="total"   ngModel  required>

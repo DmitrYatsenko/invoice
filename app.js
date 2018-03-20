@@ -1,13 +1,17 @@
 //import 'zone.js/dist/zone-node';
 //import 'reflect-metadata';
 //import { enableProdMode } from '@angular/core';
-
+require('zone.js/dist/zone-node'); 
+require('reflect-metadata'); 
 var express = require('express'),
     bodyParser = require('body-parser'),
     http = require('http'),
     path = require('path'),
     Sequelize = require('sequelize'),
     _ = require('lodash');
+const { ngExpressEngine } = require('@nguniversal/express-engine/index');    
+const { provideModuleMap } = require('@nguniversal/module-map-ngfactory-loader');
+const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require(`./dist/dist-server/main.bundle`); 
 
 
 sequelize = new Sequelize('sqlite://' + path.join(__dirname, 'invoices.sqlite'), {
@@ -151,6 +155,13 @@ sequelize.sync().then(function() {
 });
 
 var app = module.exports = express();
+app.engine('html', ngExpressEngine({ 
+  bootstrap: AppServerModuleNgFactory, 
+  providers: [ 
+    provideModuleMap(LAZY_MODULE_MAP) 
+  ] 
+})); 
+app.set('view engine', 'html'); 
 app.set('port', process.env.PORT || 8000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
